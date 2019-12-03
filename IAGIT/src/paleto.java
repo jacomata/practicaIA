@@ -36,7 +36,7 @@ public class paleto extends JFrame {
 	private static Grafo metro;
 	private boolean encontrado = false;
 	private ArrayList<VV> ABIERTA;
-	private ArrayList<Vertice> CERRADA;
+	private ArrayList<VertVert> CERRADA;
 
 	/**
 	 * Launch the application.
@@ -117,8 +117,8 @@ public class paleto extends JFrame {
 		metro.insertarArista(vertices.get(31), vertices.get(32), 0);
 		metro.insertarArista(vertices.get(32), vertices.get(33), 0);
 		metro.insertarArista(vertices.get(33), vertices.get(34), 0);
-		 metro.insertarArista(vertices.get(34), vertices.get(35), 0);
-		 metro.insertarArista(vertices.get(35), vertices.get(29), 0);//suidobashi-ochanomizu
+		metro.insertarArista(vertices.get(34), vertices.get(35), 0);
+		metro.insertarArista(vertices.get(35), vertices.get(29), 0);// suidobashi-ochanomizu
 		metro.insertarArista(vertices.get(29), vertices.get(15), 0);
 		metro.insertarArista(vertices.get(29), vertices.get(17), 0);
 
@@ -183,9 +183,8 @@ public class paleto extends JFrame {
 				if (!encontrado) {
 					JOptionPane.showMessageDialog(contentPane, "NODO PARTIDA NO RECONOCIDO", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
-					
+
 				}
-					
 
 				encontrado = false;
 
@@ -199,33 +198,58 @@ public class paleto extends JFrame {
 					JOptionPane.showMessageDialog(contentPane, "NODO LLEGADA NO RECONOCIDO", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 
-				CERRADA.add(verticePartida);
-				//ABIERTA.add(new VV(verticePartida, 0));
+				CERRADA.add(new VertVert(verticePartida, new Vertice("ACEPTAR")));
+				// ABIERTA.add(new VV(verticePartida, 0));
 
 				int dRecorrida = 0;
 				int dTotal = 0;
 				boolean salir = false;
+				boolean salirok = false;
+				Vertice hijo;
+				Vertice padre;
+				boolean hallegado=false;
+				Vertice partidaOriginal=new Vertice(nodoPartida);
+				
 
-				while (!verticePartida.getEtiqueta().equals(verticeLlegada.getEtiqueta())) {// si que hace falta un
-																							// while general pero la
-																							// condicion de salida no se
-																							// si es esa
+				while (!verticePartida.getEtiqueta().equals(verticeLlegada.getEtiqueta())) {
+					hijo=CERRADA.get(0).getVertice1();
+					
+					dRecorrida=0;
+					while(!hallegado) {
+					for (int k=0;k<CERRADA.size();k++) {
+						if(CERRADA.get(k).getVertice1().equals(hijo)) {
+							padre=CERRADA.get(k).getVertice2();
+						}
+					}
+					dRecorrida+= new Arista(hijo,padre).getPeso();
+					hijo=padre;
+					if(hijo.equals(partidaOriginal)) {
+						hallegado=true;
+					}
+					}
 
 					for (int i = 0; i < verticePartida.getVecinos().size(); i++) {
+											
+						
 
-						if (CERRADA.contains(verticePartida)) {// si es un vertice que ya hemos cogido no lo miramos,
-							break; // no se comprueba con abierta porque un nodo se podria mirar dos veces
-						} // si hay dos caminos distintos pero si esta en cerrada ya ha sido ELEGIDO
+						for (int j = 0; j < CERRADA.size() && !salirok; j++) {
+							if (CERRADA.get(j).getVertice1().equals(verticePartida)) {
+								salirok = true;
 
-						// verticePartida.getVecinos().get(i).getVecinoDe(verticePartida); ¿Sirve para
-						// algo?
+							}
+
+						}
+						if (salirok) {
+							salirok=false;
+							break;
+						}
 
 						int peso;
 						int heuristica;
 
 						peso = verticePartida.getVecino(i).getPeso();
-						heuristica = calculateDistanceByHaversine(verticePartida.getVecinos().get(i).getVecinoDe(verticePartida),
-								verticeLlegada);
+						heuristica = calculateDistanceByHaversine(
+								verticePartida.getVecinos().get(i).getVecinoDe(verticePartida), verticeLlegada);
 
 						dTotal = dRecorrida + peso + heuristica;
 
@@ -245,38 +269,31 @@ public class paleto extends JFrame {
 						}
 
 					}
-					//hasta aqui para rellenar la lista abierta
+					// hasta aqui para rellenar la lista abierta
 
-					int min=ABIERTA.get(0).getValor();
-					VV salida= new VV(new Vertice(""),0);
-				
+					int min = ABIERTA.get(0).getValor();
+					VV salida = new VV(new Vertice(""), 0);
 
 					for (int i = 0; i < ABIERTA.size(); i++) {// recorro ABIERTA en busca del menor despues de haber
 																// expandido un nodo
 						if (min > ABIERTA.get(i).getValor()) {
 							min = ABIERTA.get(i).getValor();// le vamos asignando el valor mas bajo, chompea un poco por
 															// el valor de min al principio
-							
-							
+
 						}
 						salida.setV(ABIERTA.get(i).getV());// para tener el objeto VV y no tener luego que
 						// buscar otra vez
 						salida.setValor(min);
-						//ABIERTA.remove(i);
-						
+						// ABIERTA.remove(i);
 
 					}
+
+					CERRADA.add(new VertVert( salida.getV(),verticePartida));
+					ABIERTA.remove(salida);
 					
 					
-					CERRADA.add(salida.getV());
-					verticePartida = salida.getV();
-					//salida.setValor(-min);// a los que vayamos cogiendo para meter en CERRADA, en vez de sacarlos de
-											// ABIERTA
-											// les ponemos su valor en negativo, no se si esto es muy util, no me
-											// acuerdo porque he pensado que no podiaos sacarlo
 
 				}
-				
 
 			}
 		});
