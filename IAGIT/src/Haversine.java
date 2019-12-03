@@ -2,6 +2,8 @@
 
 import java.util.ArrayList;
 
+
+
 public class Haversine {
 	  private static double calculateDistanceByHaversine(coordenadas a, coordenadas b) {
 
@@ -36,43 +38,41 @@ public class Haversine {
 	  ArrayList<coordenadas> estaciones=new ArrayList<coordenadas>();
 	  public void escribirCoordenadas() {
 		  estaciones.add(new coordenadas(35.6839519,139.7020805)); //yoyogi
-		  estaciones.add(new coordenadas(35.6895965,139.7004782)); 
-		  estaciones.add(new coordenadas(35.7013007,139.7002421));
-		  estaciones.add(new coordenadas(35.7126839,139.7036425));
-		  estaciones.add(new coordenadas(35.7211861,139.7064823));
-		  estaciones.add(new coordenadas(35.7301027,139.7118843));//ikebukuro
-		  estaciones.add(new coordenadas(35.7317401,139.7283438));
-		  estaciones.add(new coordenadas(35.7337073,139.7381212));
-		  estaciones.add(new coordenadas(35.7365848,139.7472412));
-		  estaciones.add(new coordenadas(35.7373701,139.7617151));
-		  estaciones.add(new coordenadas(35.7322284,139.7665852));//nishi-nippori
-		  estaciones.add(new coordenadas(35.7289017,139.7713508));
-		  estaciones.add(new coordenadas(35.7203576,139.7790442));
-		  estaciones.add(new coordenadas(35.7119208,139.7758575));
-		  estaciones.add(new coordenadas(35.7069531,139.7746303));
-		  estaciones.add(new coordenadas(35.6985569,139.7731418));//akihabara
-		  estaciones.add(new coordenadas(35.6952811,139.7704909));
-		  estaciones.add(new coordenadas(35.6820678,139.7655776));
-		  estaciones.add(new coordenadas(35.6757852,139.7619259));
-		  estaciones.add(new coordenadas(35.6661109,139.7597208));
-		  estaciones.add(new coordenadas(35.6551327,139.7569141));
-		  estaciones.add(new coordenadas(35.6456467,139.7474507));//tamachi
-		  estaciones.add(new coordenadas(35.6293681,139.7392729));
-		  estaciones.add(new coordenadas(35.6196271,139.7280502));
-		  estaciones.add(new coordenadas(35.6264962,139.7237208));
-		  estaciones.add(new coordenadas(35.6327445,139.7160149));
-		  estaciones.add(new coordenadas(35.6465799,139.7102148));//ebisu
-		/*  estaciones.add(new coordenadas());
-		  estaciones.add(new coordenadas());
-		  estaciones.add(new coordenadas());
-		  estaciones.add(new coordenadas());
-		  estaciones.add(new coordenadas());
-		  estaciones.add(new coordenadas());
-		  estaciones.add(new coordenadas());
-		  estaciones.add(new coordenadas());
-		  estaciones.add(new coordenadas());
-		  estaciones.add(new coordenadas());
-		  estaciones.add(new coordenadas());*/
+		  estaciones.add(new coordenadas(35.6895965,139.7004782)); //shinjuku
+		  estaciones.add(new coordenadas(35.7013007,139.7002421)); //shin-okubo
+		  estaciones.add(new coordenadas(35.7126839,139.7036425)); //takadanobaba
+		  estaciones.add(new coordenadas(35.7211861,139.7064823)); //mejiro
+		  estaciones.add(new coordenadas(35.7301027,139.7118843)); //ikebukuro
+		  estaciones.add(new coordenadas(35.7317401,139.7283438)); //otsuka
+		  estaciones.add(new coordenadas(35.7337073,139.7381212)); //sugamo
+		  estaciones.add(new coordenadas(35.7365848,139.7472412)); //komagome
+		  estaciones.add(new coordenadas(35.7373701,139.7617151)); //tabata
+		  estaciones.add(new coordenadas(35.7322284,139.7665852)); //nishi-nippori
+		  estaciones.add(new coordenadas(35.7289017,139.7713508)); //nippori
+		  estaciones.add(new coordenadas(35.7203576,139.7790442)); //uguisudani
+		  estaciones.add(new coordenadas(35.7119208,139.7758575)); //ueno
+		  estaciones.add(new coordenadas(35.7069531,139.7746303)); //okachimachi
+		  estaciones.add(new coordenadas(35.6985569,139.7731418)); //akihabara
+		  estaciones.add(new coordenadas(35.6952811,139.7704909)); //kanda
+		  estaciones.add(new coordenadas(35.6820678,139.7655776)); //tokyo
+		  estaciones.add(new coordenadas(35.6757852,139.7619259)); //yurakucho
+		  estaciones.add(new coordenadas(35.6661109,139.7597208)); //shimbashi
+		  estaciones.add(new coordenadas(35.6551327,139.7569141)); //hamamatsucho
+		  estaciones.add(new coordenadas(35.6456467,139.7474507)); //tamachi
+		  estaciones.add(new coordenadas(35.6293681,139.7392729)); //shinagawa
+		  estaciones.add(new coordenadas(35.6196271,139.7280502)); //osaki
+		  estaciones.add(new coordenadas(35.6264962,139.7237208)); //gotanda
+		  estaciones.add(new coordenadas(35.6327445,139.7160149)); //meguro
+		  estaciones.add(new coordenadas(35.6465799,139.7102148)); //ebisu
+		  estaciones.add(new coordenadas(35.6645956,139.6987107)); //shibuya
+		  estaciones.add(new coordenadas(35.6687049,139.7053357)); //harajuku
+		  estaciones.add(new coordenadas(35.699593,139.7649185)); //ochanomizu
+		  estaciones.add(new coordenadas(35.6813099,139.7113735));//sendagaya
+		  estaciones.add(new coordenadas(35.680168,139.720288)); //shinanomachi
+		  estaciones.add(new coordenadas(35.686222,139.730218)); //yotsutya
+		  estaciones.add(new coordenadas(35.691047,139.735578)); //lichigaya
+		  estaciones.add(new coordenadas(35.702162,139.745002)); //lidabashi
+		  estaciones.add(new coordenadas(35.702083,139.753480)); //suidobashi
 	  }
 	  
 }
