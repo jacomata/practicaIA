@@ -1,10 +1,12 @@
+import java.util.Iterator;
+
 /*
  * Un objeto Arista modela una arista no dirigida que representa la relación de adyacencia
  * entre dos vértices. Por tanto una arista tiene dos vértices.
  * Si el peso de una arista no se especifica, su valor es 1. Esto permite representar grafos uniformes.
 */
 
-public class Arista implements Comparable<Arista>
+public class Arista implements Comparable<Arista>, Iterator
 {
     private Vertice vertice1, vertice2;
     private int peso;
@@ -147,4 +149,16 @@ public class Arista implements Comparable<Arista>
 
 	return false;
     }
+
+	@Override
+	public boolean hasNext() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Object next() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

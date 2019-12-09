@@ -13,14 +13,36 @@ public class Vertice
  
     private ArrayList<Arista> vecindad;
     private String etiqueta;
+    private double x;
+    private double y;
+    
 
-    public Vertice (String etiqueta)
+    public Vertice (String etiqueta, double x, double y)
     {
 	this.etiqueta = etiqueta;
 	this.vecindad = new ArrayList<Arista>();
+	this.x=x;
+	this.y=y;
+	
     }
 
-    /**
+    public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	/**
      * Añade un objeto Arista al array de lista vecindad
      * si y solo este no esté contenido en dicho array de lista 
      * @param arista. Objeto a añadir

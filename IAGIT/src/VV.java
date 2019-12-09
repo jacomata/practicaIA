@@ -3,9 +3,9 @@
 public class VV {
 	
 	private Vertice v;
-	private int valor;
+	private double valor;
 	
-	public VV(Vertice v, int valor) {
+	public VV(Vertice v, double valor) {
 		super();
 		this.v = v;
 		this.valor = valor;
@@ -19,12 +19,12 @@ public class VV {
 		this.v = v;
 	}
 
-	public int getValor() {
+	public double getValor() {
 		return valor;
 	}
 
-	public void setValor(int valor) {
-		this.valor = valor;
+	public void setValor(double dTotal) {
+		this.valor = dTotal;
 	}	
 	
 

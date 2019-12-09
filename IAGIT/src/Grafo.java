@@ -190,9 +190,9 @@ public class Grafo{
     /**
      * @return Set<Arista>. Devuelve todos los objetos Arista del Grafo
      **/
-    public Set<Arista> getAristas()
+    public ArrayList<Arista> getAristas()
     {
-	return new HashSet<Arista>(this.aristas.values());
+	return new ArrayList<Arista>(this.aristas.values());
     }
     
 }

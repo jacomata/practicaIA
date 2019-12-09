@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 public class Haversine {
-	  private static double calculateDistanceByHaversine(coordenadas a, coordenadas b) {
+	  static double calculateDistanceByHaversine(coordenadas a, coordenadas b) {
 
 			  double earthRadius = 6371; // km
 
