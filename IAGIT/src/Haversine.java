@@ -23,7 +23,7 @@ public class Haversine {
 			  double d = (sinlat * sinlat) + Math.cos(lat1)*Math.cos(lat2)*(sinlon*sinlon);
 			  double c = 2 * Math.asin (Math.min(1.0, Math.sqrt(d)));
 
-			  double distanceInMeters = earthRadius * c ;
+			  double distanceInMeters = earthRadius * c*1000 ;
 
 			  return distanceInMeters;
 

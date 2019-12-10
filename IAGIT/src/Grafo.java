@@ -96,6 +96,7 @@ public class Grafo{
 	if(arista.getVertice1() == null || arista.getVertice2() == null)
 	    return false;
 	return this.aristas.containsKey(arista.hashCode());
+
     }
 
 

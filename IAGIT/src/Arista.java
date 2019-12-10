@@ -48,7 +48,15 @@ public class Arista implements Comparable<Arista>, Iterator
     }
 
 
-    /** 
+    public void setVertice1(Vertice vertice1) {
+		this.vertice1 = vertice1;
+	}
+
+	public void setVertice2(Vertice vertice2) {
+		this.vertice2 = vertice2;
+	}
+
+	/** 
      * Dado un Vértice válido como parámentro de entrada
      * se devuelve su adyecente. Estos se conectan mediante una arista
      *
