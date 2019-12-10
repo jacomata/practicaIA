@@ -109,7 +109,9 @@ public class prueba {
 		String nodoPartida = "mejiro";
 		String nodoLlegada = "ochanomizu";
 		boolean encontrado = false;
-		for (int i = 0; i < vertices.size() && !encontrado; i++) {
+		
+		//asigna el nodo de partida y el de llegada
+		for (int i = 0; i < vertices.size() && !encontrado; i++) { 
 			if (vertices.get(i).getEtiqueta().equals(nodoPartida)) {
 				encontrado = true;
 				verticePartida = vertices.get(i);
@@ -128,7 +130,7 @@ public class prueba {
 		}
 		
 		CERRADA.add(new VertVert(verticePartida, new Vertice("ACEPTAR", 0, 0)));
-		ABIERTA.add(new VV(verticePartida, 0));
+		//ABIERTA.add(new VV(verticePartida, 0));
 
 		double dRecorrida;
 		double dTotal = 0;
@@ -145,7 +147,7 @@ public class prueba {
 		
 		// CERRADA.add(new VertVert(v3,v1));
 		// CERRADA.add(new VertVert(v2,v3));
-
+		//el bucle principal que avanza cuando se mueve de nodo
 		while (!verticePartida.getEtiqueta().equals(verticeLlegada.getEtiqueta()) ) {
 			for (int i=0;i<CERRADA.size();i++) {
 				System.out.print(CERRADA.get(i).getVertice1().getEtiqueta());
@@ -154,18 +156,20 @@ public class prueba {
 			}
 			hallegado=false;
 			hijo = CERRADA.get(CERRADA.size() - 1).getVertice1();
-			padre = CERRADA.get(0).getVertice2();
+			padre = CERRADA.get(CERRADA.size() - 1).getVertice2();
 			dRecorrida = 0.0;
-			aux = new Arista(new Vertice("", 0, 0), new Vertice("", 0, 0),0);//tiene que ir aqui??
+			
+			//Calcula la distania recorrida para CERRADA.size() - 1
 			while (!hallegado) {
-				 
+				aux = new Arista(new Vertice("", 0, 0), new Vertice("", 0, 0),0);
+				//busca al padre
 				for (int k = CERRADA.size(); k > 0; k--) {
 					if (CERRADA.get(k - 1).getVertice1().equals(hijo)) {
 						padre = CERRADA.get(k - 1).getVertice2();
 					}
 				}
 				
-				
+				//busca la arista
 				for (int i=0;i<metro.getAristas().size();i++) {
 					if((metro.getAristas().get(i).getVertice1()==hijo && metro.getAristas().get(i).getVertice2()==padre) ||
 							(metro.getAristas().get(i).getVertice2()==hijo && metro.getAristas().get(i).getVertice1()==padre)) {
@@ -177,27 +181,32 @@ public class prueba {
 				System.out.println(dRecorrida+"HELLO"+aux.getPeso()+"PESO");
 
 				hijo = padre;
+				//comprueba si hemos llegado al final 
 				if (hijo.getEtiqueta().equals("ACEPTAR")) {
 					hallegado = true;
 				}
 			}
-
+			
+			// recorre los vecinos 
 			for (int i = 0; i < verticePartida.getVecinos().size(); i++) {
 
 				boolean añadido = false;
 
+				//compueba si esta en la cerrada
 				for (int j = 0; j < CERRADA.size() ; j++) {
 					if (CERRADA.get(j).getVertice1().equals(verticePartida.getVecino(i).getVecinoDe(verticePartida))) {
 						salirok = true;
 						System.out.print("3");
 
 					}
-
 				}
 
+				
 				if (!salirok) {
+					
 					double peso;
 					double heuristica;
+					//coor1 = el vecino , coor2 = destino 
 					coor1 = new coordenadas(verticePartida.getVecinos().get(i).getVecinoDe(verticePartida).getX(),
 							verticePartida.getVecinos().get(i).getVecinoDe(verticePartida).getY());
 					coor2 = new coordenadas(verticeLlegada.getX(), verticeLlegada.getY());
@@ -206,24 +215,28 @@ public class prueba {
 					heuristica = Haversine.calculateDistanceByHaversine(coor1, coor2);
 
 					System.out.print("2");
-					dTotal = dRecorrida + peso + heuristica;
+					
+					dTotal = dRecorrida + peso + heuristica; //el valor que compararemos
 
+					//Mira si el vertice ya esta en la abierta 
 					for (int j = 0; j < ABIERTA.size(); j++) {
 
-						if (ABIERTA.get(j).getV().getEtiqueta()
+						if (ABIERTA.get(j).getVertice1().getEtiqueta()
 								.equals(verticePartida.getVecinos().get(i).getVecinoDe(verticePartida).getEtiqueta())) {
 							// en la linea de arriba nos comprueba las etiquetas, no el vertice en si, por
 							// si acaso
 							añadido = true;
 							if (ABIERTA.get(j).getValor() > dTotal) {
 								ABIERTA.get(j).setValor(dTotal);
+								//cambia el padre
+								ABIERTA.get(j).setVertice2(verticePartida); 
 							}
 						}
 
 					}
 					if (!añadido) {
 
-						ABIERTA.add(new VV(verticePartida.getVecinos().get(i).getVecinoDe(verticePartida), dTotal));
+						ABIERTA.add(new VV(verticePartida.getVecinos().get(i).getVecinoDe(verticePartida),verticePartida, dTotal));
 
 					}
 					
@@ -231,9 +244,12 @@ public class prueba {
 				salirok=false;
 					
 			}
+			
+			
 			for (int i=0;i<ABIERTA.size();i++) {
-				System.out.print(ABIERTA.get(i).getV().getEtiqueta());
-				System.out.println(ABIERTA.get(i).getValor()+"VALOR");
+				System.out.print(" hijo: "+ABIERTA.get(i).getVertice1().getEtiqueta());
+				System.out.print(" padre: "+ABIERTA.get(i).getVertice2().getEtiqueta());
+				System.out.println(" Valor "+ABIERTA.get(i).getValor());
 				
 			}
 			System.out.println("--------------------------");
@@ -241,32 +257,32 @@ public class prueba {
 			// hasta aqui para rellenar la lista abierta
 
 			double min = 1000000;
-			VV salida = new VV(new Vertice("", 0, 0), 0);
+			VV salida = new VV(new Vertice("", 0, 0),new Vertice("", 0, 0), 0);
 
 			int indice=0;
+			//busca el elemento de la abierta con valor mas pequeño
 			for ( int i = 1; i < ABIERTA.size(); i++) {
 				if (min > ABIERTA.get(i).getValor()) {
 					min = ABIERTA.get(i).getValor();
-					salida.setV(ABIERTA.get(i).getV());
+					salida.setVertice1(ABIERTA.get(i).getVertice1());
+					salida.setVertice2(ABIERTA.get(i).getVertice2());
 					salida.setValor(min);
 					indice=i;
 
 				}
 
 			}
-
-			CERRADA.add(new VertVert(salida.getV(), verticePartida));
+			//lo añadimos a la cerrada
+			CERRADA.add(new VertVert(salida.getVertice1(), salida.getVertice2()));
 			ABIERTA.remove(indice);
-			verticePartida=salida.getV();
-			
-
-
+			//avazamos en el grafo
+			verticePartida=salida.getVertice1();
 		}
 
 		boolean parar = false;
 		hijo = CERRADA.get(CERRADA.size() - 1).getVertice1();
 		solucion.add(hijo);
-		padre = CERRADA.get(0).getVertice2();// esta bien?
+		padre = CERRADA.get(CERRADA.size() - 1).getVertice2();// esta bien? lo he cambiado
 		while (!hallegado) {
 			for (int k = CERRADA.size(); k > 0 && !parar; k--) {
 				if (CERRADA.get(k - 1).getVertice1().equals(hijo)) {

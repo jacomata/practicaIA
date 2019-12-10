@@ -20,7 +20,4 @@ public class VertVert {
 		this.vertice2 = vertice2;
 	}
 	
-	
-	
-
 }
